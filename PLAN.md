@@ -1,6 +1,6 @@
 # PLAN — ewing-cell-line-catalog
 
-> Status: Draft · Version: 0.1.0 · Last updated: 2026-06-28 · Owner: TBD (maintainer) · Lane: donated · Risk tier: low (with medium-risk sub-tasks, explicitly tagged)
+> Status: Draft · Version: 0.2.0 · Last updated: 2026-06-29 · Owner: TBD (maintainer) · Lane: donated · Risk tier: low (with medium-risk sub-tasks, explicitly tagged)
 
 > **For the families.** Ewing sarcoma is a rare, aggressive bone-and-soft-tissue cancer that
 > mostly strikes children, teenagers, and young adults. Five-year survival for metastatic or
@@ -34,6 +34,15 @@ tooling (identity resolution, validation, dependency aggregation) to keep it cor
 DepMap ships quarterly releases. **The deliverable is metadata and derived aggregates from
 open-access sources — never patient data, never a clinical recommendation, never a therapeutic
 claim.**
+
+This catalog is built **on** the authoritative resources, not in competition with them: Cellosaurus
+remains the identity authority (and the machine-readable surface over the ICLAC misidentification
+register), DepMap/CCLE remains the dependency-data authority, and ICLAC remains the
+misidentification authority. The contribution is the **Ewing-focused, RRID-anchored,
+misidentification-aware join** that no pan-cancer authority offers at disease depth — and it is
+careful to **distinguish authenticated identity (STR-supported) from merely asserted identity**, and
+to never assert an authentication the underlying data does not support. (See *Competitive landscape &
+differentiation*.)
 
 The hard constraint and central design principle is the **open-data-only gate**: every source is
 verified to be open-access and to permit derivative redistribution under our output license before
@@ -143,7 +152,9 @@ outcome counts only if it is **externally verifiable**.
 authentication status, disease/Oncotree, fusion status with evidence, donor fields where publicly
 available, omics-availability map, dependency summary with version, license per source-block). A
 delivered entry must reach **≥ 90/100**, recorded as a before/after pair against the as-found state
-captured at triage. The pair is stored in the entry's provenance artifact.
+captured at triage. The pair is stored in the entry's provenance artifact. The score is **weighted**:
+`identity`, `authentication`, and `fusion` are **mandatory-to-ship** — a record cannot reach the
+≥ 90 gate while missing any of them, even if every minor field (e.g. `culture`) is full.
 
 **What "accepted upstream" means and the evidence the Steward records.** A single canonical
 **outcome artifact** per event (`outcomes/<event-id>.json`: channel, URL/permalink, timestamp,
@@ -151,6 +162,12 @@ before/after detail). Acceptance is defined per channel: Cellosaurus correction 
 applied change / acknowledgement reference; Cell Model Passports = applied correction or accepted
 issue; DepMap = accepted community-feedback reference; third-party reuse = a citation, a fork that
 builds on the catalog, or an issue/PR referencing it. Self-reported reuse never counts.
+
+**Primary vs bonus outcome signal.** Upstream acceptance is **exogenous and slow** (it runs on the
+maintainers' timeline), so it is held as a **goal/bonus**, not the sole gating signal — the
+**primary delivered-outcome signal is catalog adoption by a real research consumer**, with accepted
+upstream corrections counting as additional, compounding good. M3 is structured so it cannot be held
+indefinitely open waiting on an upstream queue.
 
 ## Scope
 
@@ -192,6 +209,47 @@ until it passes the per-model open-data/license/donor-privacy gate. The roster h
 known-misidentified lines (so they are catalogued *with their warning*, not silently dropped) and
 records each source's license up front.
 
+## Competitive landscape & differentiation
+
+The relevant resources are authorities to build **on**, not duplicate. The whitespace is a
+disease-scoped, misidentification-aware, omics-availability-linked, fully-provenanced **open** catalog
+— which none of them provide.
+
+- **Cellosaurus (SIB) — the identity authority, our anchor (not a threat).** Describes >100,000 cell
+  lines; issues the `CVCL_`/RRID identifiers; aggregates synonyms, donor info, STR profiles, and
+  **machine-readable misidentification/"problematic" flags** (re-encoding ICLAC status); CC BY 4.0;
+  downloadable + API. *Gap we fill:* breadth over depth — no Ewing-specific curation, no linkage to
+  *which* open omics/dependency data exist. We build **on** Cellosaurus as the canonical identity key
+  and the machine surface over ICLAC.
+- **DepMap / CCLE (Broad) — the dependency-data authority.** Largest compendium of genome-scale
+  CRISPR (Chronos gene-effect), expression, CN, open-tier mutations, PRISM drug screens; public
+  releases CC BY 4.0 on Figshare (pin the exact per-release DOI). *Gap we fill:* pan-cancer, not
+  disease-curated; per-gene/per-line UX, not "give me the trustworthy Ewing roster with
+  authentication + fusion + what data exists"; no misidentification curation; release-to-release model
+  churn is the user's problem.
+- **Cell Model Passports (Wellcome Sanger) — curated model hub** (>2,000 models, REST API,
+  cross-refs Cellosaurus). *Gap we fill:* pan-cancer; **per-dataset licensing is mixed (not uniformly
+  CC BY)** — a higher-risk license assumption than DepMap; no consolidated misidentification view.
+- **ICLAC Register of Misidentified Cell Lines — the misidentification authority** (v14, 15 Feb 2026,
+  608 lines: 560 with no authentic stock, 48 with authentic stock found), distributed as a versioned
+  **PDF, not an API**. *Gap we fill:* not per-disease; no omics/identity linkage; manual ingestion.
+- **COSMIC Cell Lines Project (Sanger) — deep mutation curation, but non-commercial /
+  no-redistribution license** (free for academic use with registration; commercial license
+  otherwise). **Link-only here — even *derived* COSMIC counts are not emitted.**
+- **ATCC / DSMZ public catalogs — sourcing/availability + vendor STR.** Copyrighted catalog prose and
+  vendor-licensed STR tables; vendor-scoped; no cross-resource identity or dependency view. **Fact +
+  link only; vendor STR is link-only, never redistributed.**
+
+**Differentiator (single strongest):** a per-model, versioned **"trust + data-availability passport"
+for Ewing** — every assertion (identity, authentication-with-axis, fusion-with-breakpoint, what open
+data exists, what dependencies are reported) carried with **field-level provenance, source version,
+and per-source license** — turning four portals + one PDF into one citable, machine-readable, openly
+(CC-BY) licensed object. Supporting differentiators: **misidentification-aware by construction** (with
+the ICLAC-vs-reclassification distinction the big resources blur); **provenance + license as
+first-class data, not prose**; an **upstream-correction loop**; **honest, descriptive framing** with
+standing "research observation, not advice" caveats; and **refresh discipline** (pinned releases +
+quarterly diff) that the static PDF/portal status quo lacks.
+
 ## Solution approach & architecture
 
 This is a **content/data-curation project with light, dependency-minimal software**. It assembles a
@@ -203,13 +261,37 @@ CSV, human-readable site) are *projections* of it. Every value-bearing field is 
 source, sourceVersion, retrievedAt, license}` provenance cell (or an array of them where multiple
 sources agree/disagree). Fields:
 
-- `id` (internal slug); `identity { depmapId (ACH-…), rrid (CVCL_…), cellModelPassportId (SIDM…),
-  ccleName, synonyms[] }`
-- `authentication { strProfileAvailable, misidentified (bool), misidentifiedRegister (ICLAC ref),
-  contaminationNotes, authenticationSource }` — **surfaced first** in every entry
+- `id` (internal slug); `identity { depmapId (ACH-…), rrid (the **primary** Cellosaurus `CVCL_`
+  accession; the `RRID:` prefix is normalized off/on consistently), secondaryAccessions[] (merged
+  Cellosaurus accessions, so a later upstream merge doesn't silently break the anchor),
+  cellModelPassportId (SIDM…), ccleName (e.g. `A673_BONE` — a legacy, release-unstable string;
+  **recorded but NEVER a resolution anchor**), synonyms[] }`. Each cross-ID is tagged **`direct`**
+  (asserted by that resource itself) vs **`inherited`** (copied from another resource — DepMap,
+  Sanger and Cellosaurus already cross-reference each other), so apparent "independent agreement" is
+  not mistaken for corroboration.
+- `authentication` — **surfaced first** in every entry — splits the two axes the big resources blur:
+  - `strProfile { markers[], source, license }` — the actual marker table is stored **only when the
+    source license permits redistribution** (Cellosaurus, CC BY 4.0); vendor STR (ATCC/DSMZ) is
+    `available:true` + **link-only**, never copied. (Replaces the old `strProfileAvailable` boolean,
+    which under-delivered.)
+  - `misidentified` — an **enum**: `clean | misidentified_no_authentic | authentic_stock_exists |
+    contaminated` — read from **Cellosaurus's machine-readable "problematic" flag**, citing the
+    **ICLAC register vN as the underlying authority**. (Distinguishes ICLAC's "no authentic stock"
+    from "authentic stock since found.")
+  - `diagnosisReclassified` — a **separate** disease-of-origin-history axis (NOT misidentification):
+    e.g. **A673 is authentic patient cells, originally called rhabdomyosarcoma in 1973, later
+    reclassified as Ewing sarcoma via EWS-FLI1/cytogenetics**. Conflating this with `misidentified`
+    would wrongly flag the project's flagship pilot.
+  - `misidentifiedRegister (ICLAC ref + version)`, `contaminationNotes`, `authenticationSource`.
+  - **A misidentification label is only ever quoted from ICLAC/Cellosaurus with version — never an
+    independent determination** (publicly asserting a line is misidentified is reputationally
+    consequential).
 - `disease { oncotreeCode (e.g. EWS), oncotreeName, lineage (bone), subtype }`
-- `fusion { partner5p (EWSR1), partner3p (FLI1|ERG|other), breakpointType (e.g. type 1),
-  evidence[] }`
+- `fusion { partner5p (EWSR1), partner3p (FLI1|ERG|other), breakpointExons (controlled canonical
+  form, e.g. `EWSR1 ex7 :: FLI1 ex6`), legacyType (annotated secondary field, e.g. "Type 1",
+  separately cited), evidence[] }` — non-canonical **"Ewing-like"** fusions (CIC-rearranged, BCOR)
+  are now classified as *distinct* entities; the roster gate decides explicitly whether each is in
+  (flagged-distinct) or excluded.
 - `donor { sexAtSampling, ageAtSampling, siteOfSampling, sampleType (primary|metastasis|relapse) }`
   — **populated only from values already published by Cellosaurus/Cell Model Passports**; never
   inferred, never enriched, never cross-linked to external person data
@@ -217,20 +299,32 @@ sources agree/disagree). Fields:
 - `availability[] { repository (ATCC|DSMZ|COG|...), catalogNumber, url }` — **link + fact only**, no
   copied vendor prose
 - `omicsAvailability { expression, copyNumber, mutationsOpenTier, fusions, drugSensitivity }` each
-  `{ available (bool), source, sourceVersion, url }`
+  `{ available (`true | false | unknown` — **`unknown` (not-checked) ≠ confirmed-absent**), datasetId,
+  releaseVersion, url, lastVerifiedRelease }`. Availability is verified by **manifest-diffing** the
+  release model lists (the only scalable, auditable method — it also feeds the quarterly refresh),
+  not by ad-hoc per-line lookup. (A line can have expression but no CRISPR, or be screen-dropped in a
+  later release.)
 - `dependencies { source: "DepMap CRISPR (Chronos)", release, selectiveDependencies[] {gene,
   geneEffect, caveat}, methodologyRef, disclaimer }` — research observation, not guidance
-- `license` per source-block; `completenessScore { before, after }`; `provenance { compiledAt,
-  compiledFromReleases[] }`
+- `license` per source-block; `completenessScore { before, after }` — **weighted**: `identity`,
+  `authentication`, and `fusion` are **mandatory-to-ship** and cannot be traded against
+  `culture`/minor fields before the ≥ 90/100 gate applies; `revisionHistory[]` (per-entry change log);
+  `provenance { compiledAt, compiledFromReleases[] }`. The catalog as a whole carries a semantic
+  `catalogVersion` so downstream reusers can diff against — and cite — a stable snapshot.
 
 **Pipeline (per model).**
 1. **Triage & gate** — confirm each contributing source is open-access and permits derivative
    redistribution under our output license; confirm no controlled-access data; confirm donor fields
    are limited to already-published values. PASS/FLAG/EXCLUDE recorded as a committed artifact.
-2. **Identity resolution** — resolve and cross-check DepMap ID ↔ RRID (Cellosaurus) ↔ Cell Model
-   Passports ID; record conflicts. RRID is the cross-resource anchor.
-3. **Authentication check** — look up ICLAC register + Cellosaurus "problematic" flags; record
-   misidentification/contamination status prominently.
+2. **Identity resolution** — resolve and cross-check DepMap ID ↔ primary CVCL accession (Cellosaurus)
+   ↔ Cell Model Passports ID, tagging each cross-ID `direct` vs `inherited`; record conflicts and any
+   merged/secondary accessions. The **primary CVCL accession is the cross-resource anchor**;
+   `ccleName` is never used to resolve.
+3. **Authentication check** — read misidentification/contamination status from **Cellosaurus's
+   machine-readable "problematic" flag** and reconcile it against the **ICLAC register (cited as the
+   underlying authority, by version)** — treating Cellosaurus as the machine surface over the ICLAC
+   PDF, not as an independent second lookup. Record the `misidentified` enum AND the separate
+   `diagnosisReclassified` axis prominently; never assert a misidentification the sources do not.
 4. **Metadata assembly** — disease/Oncotree, fusion (with evidence), donor (published-only),
    availability, culture.
 5. **Omics-availability mapping** — record which open data types exist + where + at what version.
@@ -248,15 +342,50 @@ providers' published download endpoints / files at pinned release versions; **we
 re-host** bulk matrices.
 
 **Pinned source releases** (recorded in each record's `compiledFromReleases`, bumped only via a
-deliberate refresh task): DepMap public release (e.g. `DepMap Public 24Q2` — exact release pinned at
-M2), Cell Model Passports release date, Cellosaurus version, ICLAC register version. Any drift is an
-isolated refresh task, never a silent change.
+deliberate refresh task): the **exact DepMap public-release Figshare DOI** (not "DepMap public" —
+the license is CC BY 4.0 *per release*, e.g. DepMap 24Q4 Public; pin the DOI), the Cell Model
+Passports release number/date, the Cellosaurus release number, and the **ICLAC vN PDF (SHA-256 +
+Wayback save URL)**. Any drift is an isolated refresh task, never a silent change.
+
+**Claude API leverage (assistive only; every output human-verified, every fact provenanced).**
+Claude is used to *accelerate* curation, never to *decide* identity, misidentification, or license:
+- **Name/synonym harmonization & candidate identity resolution** — propose synonym clusters
+  (`A-673/A673/A 673`; `TC-71/TC71`; `CHLA-9/10/25`) and *candidate* DepMap↔CVCL↔SIDM mappings for the
+  resolver, **flagging conflicts for human confirmation**.
+- **Literature fact-extraction with citations** — extract fusion partner + exon breakpoint, donor
+  fields *as published*, culture conditions, and derivation/reclassification history from open-access
+  papers (PMC-OA), emitting `{value, quote, PMID, section}` straight into the field-level provenance
+  cells.
+- **Discrepancy / drift detection** — cross-compare a line's fusion/disease/donor across DepMap, Cell
+  Model Passports, and Cellosaurus and **surface disagreements** as review items, never silently
+  picking a winner.
+- **License-clause triage assistant** — read a source's terms page and *draft* a
+  `permitsRedistribution` rationale with the quoted clause + URL **for the License+privacy reviewer
+  to ratify** (Claude drafts; the human makes the binding PASS/FLAG/EXCLUDE call).
+- **Release-diff summarization** — summarize what changed for Ewing lines between DepMap releases to
+  drive the quarterly refresh.
+
+**Hard guardrails on Claude's role** (schema- and review-enforced): identity & misidentification
+determinations are **authoritative-source-only** (read verbatim from ICLAC + Cellosaurus with
+version, never an LLM judgement — and never assert an authentication the data doesn't support); **no
+fabricated or inferred provenance** (a fact without a citable open source stays empty — never a
+synthesized PMID/breakpoint/donor value); license calls are **human-ratified**; **no donor
+enrichment/re-identification** and **no clinical/therapeutic interpretation** of dependencies,
+regardless of model confidence; diagnosis-of-origin reclassification (the A673 case) is asserted only
+from primary literature + Cellosaurus, never inferred from fusion presence alone.
 
 **Key decisions (locked).**
 - **Canonical-model-first**: never hand-maintain parallel JSON/CSV/site formats.
 - **Provenance is mandatory at the field level**, not the record level: an uncited assertion fails
   review.
-- **RRID (Cellosaurus CVCL_) is the identity anchor** across resources.
+- **The primary Cellosaurus CVCL_ accession is the identity anchor** across resources (RRID prefix
+  normalized; `secondaryAccessions[]` captured; `ccleName` never an anchor; cross-IDs tagged
+  `direct` vs `inherited`).
+- **Authentication is two axes, not one**: `misidentified` (ICLAC enum, via Cellosaurus's machine
+  surface) is separate from `diagnosisReclassified` (disease-of-origin history). A misidentification
+  label is always quoted from the authority with version, never independently determined.
+- **Authenticated (STR-supported) identity is distinguished from merely asserted identity**; the
+  catalog never claims an authentication the data does not support.
 - **Open-data/license/donor gate is blocking** and committed as an artifact per model.
 - **Dependencies are descriptive aggregates with a standing caveat**, never interpreted clinically.
 - **Upstream corrections are a first-class output**, not a side effect.
@@ -305,11 +434,11 @@ sarcoma. We therefore hold a conservative line:
 
 | Source | What we take | License | Disposition |
 | --- | --- | --- | --- |
-| **DepMap (Broad)** — CRISPR gene-effect (Chronos), CCLE expression/CN/mutations(open-tier)/fusions, model metadata | dependency aggregates, omics-availability, IDs | CC BY 4.0 (DepMap public releases) — **VERIFY exact release terms at gate** | ACCEPT (attribution; pin release) |
-| **Cell Model Passports (Sanger)** | model metadata, IDs, omics availability | CC BY 4.0 — **VERIFY at gate** | ACCEPT (attribution) |
-| **Cellosaurus (SIB)** | RRID, synonyms, donor (published-only), misidentification flags, STR availability | CC BY 4.0 | ACCEPT (attribution; identity anchor) |
-| **ICLAC Register of Misidentified Cell Lines** | misidentification/contamination status | published register (terms **VERIFY at gate**; attribute) | ACCEPT as factual flag (cite register + version) |
-| **COSMIC / Cell Lines Project (Sanger)** | mutation calls | non-commercial / custom | **FLAG — link-only, NOT redistributed** |
+| **DepMap (Broad)** — CRISPR gene-effect (Chronos), CCLE expression/CN/mutations(open-tier)/fusions, model metadata | dependency aggregates, omics-availability, IDs | CC BY 4.0 — confirmable **per release** (e.g. DepMap 24Q4 Public on Figshare) | ACCEPT (attribution; **pin the exact Figshare DOI per release**) |
+| **Cell Model Passports (Sanger)** | model metadata, IDs, omics availability | **per-dataset, mixed** (NOT uniformly CC BY; some components historically academic-login-gated) — **VERIFY-HIGH-RISK at gate** | ACCEPT *only for fields whose terms clear redistribution*; else downgrade to link-only |
+| **Cellosaurus (SIB)** | primary CVCL accession + secondary accessions, synonyms, donor (published-only), **machine-readable misidentification ("problematic") flags re-encoding ICLAC**, STR profiles | CC BY 4.0 | ACCEPT (attribution; **identity anchor + machine surface over ICLAC**) |
+| **ICLAC Register of Misidentified Cell Lines** | misidentification/contamination status | published register (versioned **PDF, not an API**; terms **VERIFY at gate**; attribute) | ACCEPT as factual flag (cite **register vN**; read status via Cellosaurus, cite ICLAC as authority) |
+| **COSMIC / Cell Lines Project (Sanger)** | mutation calls | non-commercial / custom (free academic w/ registration; **prohibits redistribution**) | **FLAG — link-only, NOT redistributed (even *derived* counts are not emitted)** |
 | **OncoKB** | variant/oncogenicity annotation | non-commercial / custom | **FLAG — link-only, NOT redistributed** |
 | **GDSC drug sensitivity** | drug-response availability | **VERIFY** (terms not assumed) | availability-flag only until terms verified; aggregates only if license permits |
 | **ATCC / DSMZ / COG repositories** | catalog number, RRID, availability link | vendor catalog (copyrighted prose) | **fact + link only**; never copy descriptive text |
@@ -329,7 +458,10 @@ string. Field-level provenance ties each value to one of these blocks.
 **Attribution & output license.** Catalog **metadata + derived aggregates** are licensed **CC BY
 4.0**; **code** (resolver, validator, aggregator, publisher) is **MIT**. All outputs attribute
 DepMap, Cell Model Passports, Cellosaurus, and ICLAC per their licenses and clearly state that the
-catalog — not the underlying source data — is our contribution.
+catalog — not the underlying source data — is our contribution. Because aggregating multiple CC BY
+sources requires per-source attribution to survive into **every** projection, the **CSV/flat export
+is the likely failure point**: each projection must carry machine-readable source+license per field,
+or a row-level/source manifest, so attribution is never silently dropped on flat export.
 
 ## Quality, review & risk gates
 
@@ -377,34 +509,50 @@ accepted upstream correction is.**
   chosen because every core source covers it, so the full pipeline can be exercised; and the first
   *real outcome* is reachable via a **self-serve channel** (an accepted upstream correction to
   Cellosaurus / Cell Model Passports does not depend on us first signing a partner).
-- Exit criteria: (1) canonical record schema + field-level provenance model published; (2) source
-  register with verified per-source licenses published; (3) open-data/license/donor gate checklist
-  exists and is applied to the pilot; (4) identity resolver + validator working in CI with golden
-  fixtures; (5) one pilot model (A673) catalogued end-to-end at ≥ 90/100 with gate artifact; (6)
-  License+privacy reviewer and Domain reviewer **named**; (7) ≥ 1 beneficiary/partner outreach
-  thread opened.
+- Exit criteria: (1) canonical record schema + field-level provenance model published — **including
+  the split `authentication` (ICLAC enum + separate `diagnosisReclassified`), `strProfile{}`,
+  identity `secondaryAccessions[]` + `direct`/`inherited` cross-ID tagging, the controlled fusion
+  representation, and the weighted completeness score**; (2) source register with verified per-source
+  licenses published (DepMap Figshare DOI; Cell Model Passports flagged VERIFY-high-risk); (3)
+  open-data/license/donor gate checklist exists and is applied to the pilot; (4) identity resolver +
+  validator working in CI with golden fixtures (resolver tests `ccleName`-is-not-an-anchor and
+  `inherited`-vs-`direct`); (5) one pilot model (A673) catalogued end-to-end at ≥ 90/100 with gate
+  artifact — **A673 verifies the two-axis design (authentic cells, `diagnosisReclassified` from RMS
+  to Ewing, NOT flagged `misidentified`)**; (6) License+privacy reviewer and Domain reviewer
+  **named**; (7) ≥ 1 beneficiary/partner outreach thread opened.
 
 **M1 — Authenticated core catalog.**
 - Goal: catalog the most widely used authenticated Ewing models, with misidentification audit and
   fusion annotation.
-- Exit criteria: (1) authoritative roster compiled and gate-triaged in `MODEL-ROSTER.md`; (2) ≥ 10
-  models fully catalogued at ≥ 90/100; (3) 100% of catalogued models carry authentication status
-  cross-checked against ICLAC + Cellosaurus; (4) fusion status annotated with provenance for every
-  catalogued model; (5) ≥ 1 upstream correction submitted (accepted counts toward M3).
+- Exit criteria: (1) authoritative roster compiled and gate-triaged in `MODEL-ROSTER.md`, with an
+  **explicit in/out decision on non-canonical "Ewing-like" entities (CIC-rearranged, BCOR)**; (2)
+  ≥ 10 models fully catalogued at ≥ 90/100; (3) 100% of catalogued models carry the `misidentified`
+  enum status (read from Cellosaurus, citing ICLAC vN) **and** the `diagnosisReclassified` axis; (4)
+  fusion status annotated in the controlled `EWSR1 ex_ :: partner ex_` form (+ legacy type label),
+  with provenance, for every catalogued model; (5) ≥ 1 upstream correction submitted (accepted counts
+  toward M3).
 
 **M2 — Dependencies & omics availability.**
 - Goal: add open-dependency aggregates and omics-availability mapping, and publish the catalog.
-- Exit criteria: (1) DepMap release pinned; dependency aggregator working in CI with golden
-  fixtures; (2) omics-availability map populated for the core roster; (3) dependency summaries (with
-  version + methodology + standing caveat) for the core roster; (4) catalog published
-  machine-readable (JSON + CSV) and human-readable, all assertions provenanced; (5) catalog reaches
-  ≥ 20 fully-catalogued models.
+- Exit criteria: (1) DepMap release pinned **by exact Figshare DOI**; dependency aggregator working
+  in CI with golden fixtures; (2) omics-availability map populated for the core roster at per-datatype
+  granularity (`available` true/false/`unknown`, `datasetId`, `releaseVersion`, `lastVerifiedRelease`),
+  **verified by manifest-diffing** the release model lists; (3) dependency summaries (with version +
+  methodology + standing caveat) for the core roster; (4) catalog published machine-readable (JSON +
+  CSV) and human-readable, all assertions provenanced, **stamped with a semantic `catalogVersion`** —
+  shipping a **small stable JSON schema + JSON-LD/RO-Crate context + a ~5-line query example**, and a
+  CSV that carries per-field source+license via a **row-level source manifest** so attribution
+  survives the flat export; (5) catalog reaches ≥ 20 fully-catalogued models.
 
 **M3 — Upstream corrections, reuse & sustainability.**
 - Goal: demonstrate real reuse and an upstream-correction + refresh model.
-- Exit criteria: (1) ≥ 2 corrections accepted upstream (evidence artifacts recorded); (2) ≥ 3
-  verifiable external reuse events; (3) ≥ 1 confirmed research consumer/partner; (4) refresh process
-  documented for quarterly DepMap releases with a named steward.
+- Exit criteria: (1) **≥ 1 confirmed research consumer/partner adopting the catalog — the primary
+  delivered signal** — plus ≥ 3 verifiable external reuse events; (2) ≥ 2 corrections accepted
+  upstream (evidence artifacts recorded) as the **bonus/compounding** outcome, not a hard gate that
+  could hold M3 open indefinitely on the maintainers' timeline; (3) refresh process documented for
+  quarterly DepMap releases with a named steward; (4) **a misidentification-alert diff** (see
+  *Adjacent opportunities*) fires when a catalogued line newly appears on ICLAC/Cellosaurus or is
+  dropped/changed in a DepMap release.
 
 Dependencies: M1 depends on the M0 schema + gate + resolver; M2 dependency aggregation depends on
 the M1 authenticated roster (don't aggregate dependencies for a misidentified line without its
@@ -459,7 +607,10 @@ The candidate model roster that feeds per-model tasks lives in `MODEL-ROSTER.md`
 | Redistributing an NC/custom-license source (COSMIC/OncoKB) into the CC-BY catalog | Medium | High | License gate; COSMIC/OncoKB hard-coded as link-only; objective `permitsRedistribution` criterion; reviewer sign-off | License+privacy reviewer |
 | Catalog implies a therapeutic/clinical claim from a dependency | Medium | High | Standing "research observation, not advice" caveat on every dependency; domain-reviewer framing check; non-goal enforced in review | Domain reviewer |
 | Cataloguing a misidentified line without its warning | Medium | High | Mandatory authentication check vs. ICLAC + Cellosaurus; misidentification surfaced first in every entry | Domain reviewer |
-| Wrong cross-resource identity resolution (merging two different models) | Medium | High | RRID as anchor; cross-source consistency checks; conflicts flagged not auto-resolved; resolver golden tests | Technical reviewer |
+| **Publishing a wrong/over-stated "misidentified" label** (reputationally consequential false flag) | Low | High | Label is **quoted verbatim from ICLAC/Cellosaurus with version**, never an independent determination; two-axis design separates `misidentified` from `diagnosisReclassified` so A673-type reclassification isn't mis-flagged | Domain reviewer |
+| **Cell Model Passports per-dataset license is not uniformly CC BY** → over-redistribution | Medium | High | Flagged **VERIFY-high-risk** (not bucketed with DepMap); per-field redistribution check; downgrade to link-only if terms don't clear | License+privacy reviewer |
+| **False "independent agreement" from inherited cross-IDs** inflates identity confidence | Medium | Medium | Tag each cross-ID `direct` vs `inherited`; don't count inherited refs as corroboration; `ccleName` never a resolution anchor | Technical reviewer |
+| Wrong cross-resource identity resolution (merging two different models) | Medium | High | Primary CVCL accession as anchor (+ `secondaryAccessions[]`); cross-source consistency checks; conflicts flagged not auto-resolved; resolver golden tests | Technical reviewer |
 | Donor fields drift toward re-identification | Low | High | Published-only rule; no enrichment/linkage; escalate unusual donor records; reduce/omit on doubt | License+privacy reviewer |
 | Fusion mischaracterization (FLI1 vs ERG, breakpoint type) | Medium | Medium | Provenance + domain review; cite primary source; flag disagreements across sources | Domain reviewer |
 | Source release drift (DepMap quarterly) makes catalog stale | High | Medium | Pin release per record; refresh task; staleness flagged when a newer release ships | Maintainer |
@@ -490,14 +641,58 @@ The candidate model roster that feeds per-model tasks lives in `MODEL-ROSTER.md`
 - **Outcome tracking:** the steward records accepted upstream corrections and external reuse events
   against the success metrics, reviewed each milestone.
 
+## Adjacent opportunities
+
+The schema + gate + resolver are reusable; several adjacent efforts compound the public good without
+expanding this project's scope (each is a **cross-link or a separate project**, not a dependency):
+
+- **Sibling Ewing projects (cross-link by RRID).** `ewing-expression-reanalysis` consumes *this*
+  catalog's authenticated + available roster as its trusted input set (never reanalyze a misidentified
+  line); `ewing-pdx-model-index` applies the same provenance/gate pattern to PDX/xenograft models
+  (with a tighter donor-privacy posture); `ewing-open-data-catalog` is the superset GEO/SRA study
+  index this per-model catalog links into; `ewing-single-cell-atlas` cross-links single-cell
+  availability; `ewing-fusion-detection-benchmark` can seed from this catalog's harmonized, provenanced
+  fusion truth set.
+- **A reagent-authenticity registry.** Generalize the schema + gate + resolver into a
+  disease-agnostic template for other rare/pediatric cancers (rhabdomyosarcoma, osteosarcoma, DIPG) —
+  the Ewing build is the reference implementation.
+- **A misidentification-alert feed.** A versioned diff/RSS that fires when a catalogued Ewing line
+  newly appears on the ICLAC/Cellosaurus problematic lists, or is dropped/changed in a DepMap
+  release — genuinely useful to labs and a recurring outcome generator (wired into M3 and refresh).
+- **An MCP server over the published catalog.** A read-only Model Context Protocol server exposing
+  `resolveIdentity`, `getAuthentication`, `getOmicsAvailability`, `getDependencies` so any agent can
+  query the trust layer — an adoption channel and Claude-leverage surface in one.
+
 ## Open questions
 
 - Which named lab/consortium/foundation or upstream maintainer becomes the first confirmed
   beneficiary/partner?
 - **DepMap release-terms confirmation:** confirm the exact license of the specific public release we
-  pin (assumed CC BY 4.0; must be verified at the gate before any aggregate is published).
+  pin (CC BY 4.0 is confirmable *per release*; pin the exact Figshare DOI before any aggregate is
+  published).
+- **Cell Model Passports licensing:** does it actually clear CC-BY redistribution for the specific
+  model-metadata fields used, or should it be downgraded to "VERIFY-high-risk / possibly link-only"
+  like COSMIC?
 - **GDSC drug-sensitivity terms:** confirm whether GDSC permits redistributable aggregates or only
   an availability flag.
+- **ICLAC ingestion path:** accept Cellosaurus as the machine surface over ICLAC (citing ICLAC vX as
+  the authority), or commit to parsing the ICLAC PDF directly? (Affects refresh cost; default:
+  Cellosaurus as the machine surface, reconcile against ICLAC.)
+- **Diagnosis-reclassification vs misidentification:** confirmed as *two* schema axes so A673
+  (authentic, reclassified) is never flagged misidentified — re-validate the boundary as the roster
+  grows.
+- **Non-canonical "Ewing-like" entities** (CIC-rearranged, BCOR): in scope as *flagged-distinct*, or
+  excluded at the roster gate?
+- **STR redistribution:** publish actual STR marker tables where Cellosaurus permits, or stay
+  availability-flag-only to avoid any vendor-STR rights question?
+- **Cross-ID independence:** how to record/penalize `inherited` vs `direct` cross-references so the
+  "resolved across three systems" metric isn't inflated by shared upstream assertions?
+- **Catalog versioning & DOI:** mint a Zenodo DOI per catalog release for citeable adoption, or rely
+  on git tags + `catalogVersion`?
+- **Outcome metric balance:** confirmed — adoption-by-a-consumer is the primary delivered signal,
+  with ≥ 2 *accepted* upstream corrections as a bonus rather than a hard M3 gate.
+- **Variant/derivative lines** (e.g. A673 sublines, luciferase/Cas9 derivatives): one entry with
+  derivatives, or separate entries? Affects identity resolution and donor inheritance.
 - How do we represent **cross-source disagreement** (e.g. two sources give different fusion
   breakpoints) in the public catalog — show both with provenance, or designate a primary? (Default:
   show both with provenance; never silently pick.)
@@ -513,10 +708,16 @@ The candidate model roster that feeds per-model tasks lives in `MODEL-ROSTER.md`
 - Task JSON schema — `C:\code\elyos\packages\schema\src\schemas.ts`
 - Portfolio roadmap (Track 8 cancer guardrails) — `C:\code\elyos\planning\ROADMAP.md`
 - Sibling exemplar (catalog/datasheets house style) — `C:\code\elyos\planning\projects\open-data-datasheets\PLAN.md`
-- DepMap / Cancer Dependency Map (Broad Institute) — CRISPR gene-effect (Chronos), CCLE
-- Cell Model Passports (Wellcome Sanger Institute)
-- Cellosaurus (SIB) — RRID/CVCL identifiers, misidentification flags
-- ICLAC Register of Misidentified Cell Lines
+- DepMap / Cancer Dependency Map (Broad Institute) — CRISPR gene-effect (Chronos), CCLE; public
+  releases CC BY 4.0 on Figshare (pin exact per-release DOI, e.g. DepMap 24Q4 Public)
+- Cell Model Passports (Wellcome Sanger Institute) — REST API; **per-dataset, mixed licensing**
+- Cellosaurus (SIB) — primary `CVCL_`/RRID identifiers, machine-readable misidentification
+  ("problematic") flags re-encoding ICLAC, STR profiles (CC BY 4.0)
+- ICLAC Register of Misidentified Cell Lines — versioned PDF (v14, 15 Feb 2026; 608 lines)
+- COSMIC Cell Lines Project (Sanger) — non-commercial / no-redistribution license (link-only)
+- A673 diagnosis-reclassification (rhabdomyosarcoma → Ewing via EWS-FLI1/cytogenetics) — primary
+  literature (e.g. PubMed 12606131) + Cellosaurus/ECACC
+- EWSR1-ETS fusion breakpoint nomenclature (Type 1 vs exon-pair vs HGVS) — e.g. PMC3575406
 - Oncotree disease ontology; HGNC gene nomenclature; SPDX license list; RRID initiative
 
 ---
@@ -591,8 +792,9 @@ applied** to the body above. Each is concrete and reflected in the corresponding
 **Reviewed for completeness and correctness against PLAN_SPEC (17 sections), CLAUDE.md guardrails,
 the good-deed definition, the Track-8 cancer guardrails, and the Task JSON schema.**
 
-- **Structure:** all 17 required H2 sections present and in order; metadata header present;
-  Data/licensing section leads with the binding cancer guardrails as required. ✔
+- **Structure:** all required H2 sections present and in order, plus two strategy sections added in
+  v0.2 (*Competitive landscape & differentiation*, *Adjacent opportunities*); metadata header
+  present; Data/licensing section leads with the binding cancer guardrails as required. ✔
 - **Cancer guardrails:** open-access-only enforced; controlled-access (dbGaP/EGA/biobanks)
   categorically out of scope; COSMIC/OncoKB flagged link-only; GDSC terms-pending; no medical
   advice / no therapeutic claims; provenance on every assertion. ✔
@@ -615,3 +817,69 @@ the good-deed definition, the Track-8 cancer guardrails, and the Task JSON schem
 **Sign-off:** Plan is internally consistent and ready for maintainer review. No blocking
 inconsistencies remain; outstanding items are genuine human/governance decisions, correctly surfaced
 rather than assumed.
+
+---
+
+## Changelog — v0.2 (analysis merged)
+
+Merges `COMPETITIVE-ANALYSIS.md` into the plan. Surgical/additive; guardrails preserved and
+strengthened, never weakened. No invented facts — every new claim traces to the analysis or its cited
+sources.
+
+**Correctness / schema / license fixes applied**
+
+1. **Identity anchored to the *primary* Cellosaurus CVCL accession** (RRID prefix normalized), with
+   `secondaryAccessions[]` captured so an upstream merge can't silently break the anchor; `ccleName`
+   recorded but **never a resolution anchor**; each cross-ID tagged **`direct` vs `inherited`** to
+   stop inherited DepMap/Sanger/Cellosaurus cross-refs from posing as independent corroboration.
+2. **Authentication split into two axes**: `misidentified` (ICLAC **enum** `clean |
+   misidentified_no_authentic | authentic_stock_exists | contaminated`, read from Cellosaurus's
+   machine-readable "problematic" flag, citing **ICLAC vN** as authority) **vs** `diagnosisReclassified`
+   (disease-of-origin history) — so the flagship pilot **A673** (authentic cells, RMS→Ewing
+   reclassification) is not wrongly flagged misidentified.
+3. **STR promoted from a boolean to `strProfile { markers[], source, license }`** — actual marker
+   tables redistributed **only** from CC-BY sources (Cellosaurus); vendor STR (ATCC/DSMZ) is link-only.
+4. **Misidentification label is quoted-with-version only**, never an independent determination
+   (false-flag liability) — added as a guardrail, a risk row, and a DoD expectation.
+5. **Controlled fusion representation** (`EWSR1 ex7 :: FLI1 ex6`) with the legacy "Type N" label as a
+   separately-cited secondary field; **non-canonical CIC/BCOR "Ewing-like" entities** get an explicit
+   roster-gate in/out decision.
+6. **Omics availability granularity**: per-datatype `{available (true|false|unknown), datasetId,
+   releaseVersion, url, lastVerifiedRelease}` with `unknown ≠ confirmed-absent`, verified by
+   **manifest-diffing** release model lists.
+7. **License classes segregated**: DepMap CC BY 4.0 pinned by **exact Figshare DOI per release**;
+   **Cell Model Passports flagged VERIFY-high-risk** (per-dataset, not uniformly CC BY) and split out
+   from DepMap; **COSMIC non-commercial → link-only, even derived counts not emitted**; CC-BY
+   attribution must **survive into the CSV/flat projection** via a row-level source manifest.
+8. **Weighted completeness score** (identity + authentication + fusion mandatory-to-ship);
+   **`catalogVersion` (semver) + per-entry `revisionHistory[]`** added for citeable, diffable
+   snapshots.
+
+**Strategy integrated**
+
+9. New **## Competitive landscape & differentiation** (Cellosaurus = build-on authority + machine
+   surface over ICLAC; DepMap/CCLE; Cell Model Passports; ICLAC PDF; COSMIC non-commercial;
+   ATCC/DSMZ) with the single strongest differentiator: a per-model, versioned, RRID-anchored
+   "trust + data-availability passport" for Ewing.
+10. **Claude API leverage folded into the architecture** (synonym/identity candidates, literature
+    fact-extraction with citations, discrepancy detection, license-clause drafting, release-diff) —
+    all assistive, human-verified, with hard guardrails: identity/misidentification/license decisions
+    stay authoritative-source + human; no fabricated provenance; never assert an authentication the
+    data doesn't support.
+11. **Optimizations folded into the Roadmap** (schema splits at M0; non-canonical-entity gate +
+    controlled fusion form at M1; Figshare-DOI pin, manifest-diffing, `catalogVersion`, JSON-LD/
+    RO-Crate context + query example + CSV source manifest at M2; adoption-primary + alert-feed at M3).
+12. New **## Adjacent opportunities** (cross-links to `ewing-expression-reanalysis`,
+    `ewing-pdx-model-index`, `ewing-open-data-catalog`, `ewing-single-cell-atlas`,
+    `ewing-fusion-detection-benchmark`; a disease-agnostic **reagent-authenticity registry**; a
+    **misidentification-alert feed**; an **MCP server** over the published catalog).
+13. **Open questions merged** (ICLAC ingestion path, two-axis confirmation, CIC/BCOR scope, STR
+    redistribution, Cell Model Passports licensing, cross-ID independence, catalog DOI, outcome-metric
+    balance, variant/derivative lines).
+14. **Outcome signal rebalanced**: catalog adoption is the **primary** delivered signal; ≥ 2 accepted
+    upstream corrections are a **bonus** (exogenous/slow), so M3 can't hang on an upstream queue.
+
+**Preserved unchanged:** the cancer guardrails (open-data-only; controlled-access categorically out
+of scope; per-source license verify; provenance on every assertion; research-not-advice), the
+17-section spine, the honesty posture (`verifiedNeed:false`, TO-BE-SECURED roles), and all valid v0.1
+content (including Appendix A, which records the v0.1 improvements).
