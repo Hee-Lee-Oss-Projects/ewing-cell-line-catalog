@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-upstream-012",
+  "title": "Submit first upstream correction(s) (Cellosaurus / Cell Model Passports)",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Errors found in upstream records during cataloguing should flow back to the source resources, turning the catalog into a contributor rather than just a consumer. M0/M1 requires submitting the first upstream correction(s) with recorded evidence artifacts. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Submit the first upstream correction(s) to an upstream resource and record the submission as an outcome artifact.",
+  "acceptanceCriteria": [
+    "At least one concrete correction is submitted to an upstream resource (Cellosaurus / Cell Model Passports / DepMap) via its self-serve channel.",
+    "Each submission records an outcomes/<event-id>.json (channel, permalink, timestamp, before/after) with field-level evidence.",
+    "Submissions derive only from documented, provenanced catalog findings (e.g. from misid-010/entries-009); none are speculative.",
+    "Submission counts toward M1; acceptance is tracked separately under corrections-017."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "outcomes/ submission artifact(s) plus an UPSTREAM-CORRECTIONS.md log of submitted corrections.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

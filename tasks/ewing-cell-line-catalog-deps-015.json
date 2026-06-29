@@ -1,0 +1,42 @@
+{
+  "id": "ewing-cell-line-catalog-deps-015",
+  "title": "Per-model dependency summaries for the core roster (with caveat)",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "functional-genomics"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "Using the DepMap aggregator, the project produces per-model selective-dependency summaries for the authenticated core roster - but only for models whose authentication status is known, and always with the standing not-medical-advice caveat. No therapeutic or 'druggable in patients' claim is permitted. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Produce per-model selective-dependency summaries for the authenticated core roster, each carrying source/version/methodology and the standing caveat.",
+  "acceptanceCriteria": [
+    "Dependency summaries produced only for models whose authentication status is known (depends on misid-010) - never profile a line before its flag.",
+    "Each dependency assertion carries source + release version + methodology + the standing 'research observation; not medical advice; not a treatment recommendation' caveat.",
+    "No therapeutic/prognostic/'druggable in patients' claim; domain reviewer confirms framing.",
+    "Deliverable dataset licensed CC-BY-4.0; validates in CI."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/dependencies per-model selective-dependency summaries for the core roster (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

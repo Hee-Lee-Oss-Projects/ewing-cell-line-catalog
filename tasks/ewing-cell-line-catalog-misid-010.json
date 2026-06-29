@@ -1,0 +1,40 @@
+{
+  "id": "ewing-cell-line-catalog-misid-010",
+  "title": "Misidentification + contamination audit vs. ICLAC + Cellosaurus",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Cell-line misidentification and cross-contamination are pervasive in preclinical cancer research (the reason ICLAC exists). Every catalogued model must be audited against the ICLAC register and Cellosaurus problematic flags, with the status recorded as a provenanced field and prominent warnings where applicable. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Audit every catalogued model for misidentification/contamination against ICLAC + Cellosaurus and record the provenanced status.",
+  "acceptanceCriteria": [
+    "Every catalogued model checked against the ICLAC register (version recorded) and Cellosaurus 'problematic' flags; status recorded as a provenanced field.",
+    "Any model found misidentified/contaminated carries a prominent, sourced warning in its entry.",
+    "Findings that contradict an upstream record are routed to upstream-012."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "MISIDENTIFICATION-AUDIT.md plus per-entry provenanced authentication-status fields.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

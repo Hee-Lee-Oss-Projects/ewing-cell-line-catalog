@@ -1,0 +1,39 @@
+{
+  "id": "ewing-cell-line-catalog-corrections-017",
+  "title": "Land 2+ accepted upstream corrections (evidence artifacts)",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Real-world impact for this project is measured by accepted upstream corrections, not just submissions. M3 requires landing at least two corrections accepted by an upstream resource, each with externally verifiable evidence. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Land at least two upstream corrections accepted by an upstream resource, each recorded with verifiable evidence.",
+  "acceptanceCriteria": [
+    "2+ corrections accepted by an upstream resource (Cellosaurus / Cell Model Passports / DepMap), each with a recorded outcomes/<event-id>.json (channel, permalink, timestamp, before/after).",
+    "Each accepted correction links to externally verifiable evidence; self-reported does not count."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "outcomes/ accepted-correction artifacts (2+) plus an updated UPSTREAM-CORRECTIONS.md.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

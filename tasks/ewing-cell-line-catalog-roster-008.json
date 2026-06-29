@@ -1,0 +1,42 @@
+{
+  "id": "ewing-cell-line-catalog-roster-008",
+  "title": "Compile + gate-triage authoritative Ewing model roster (MODEL-ROSTER.md)",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "data-governance"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The candidate pool of Ewing models (A673, SK-ES-1, RD-ES, TC-71, TC-32, SK-N-MC, EW8, CHLA-9/10/25, and roughly two dozen others) must be compiled into an RRID-keyed candidate backlog and gate-triaged; no model becomes a catalog entry until it passes the per-model gate. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Compile MODEL-ROSTER.md as the RRID-keyed candidate funnel with a gate disposition for every candidate.",
+  "acceptanceCriteria": [
+    "MODEL-ROSTER.md lists candidate Ewing lines keyed by RRID with DepMap/Cell Model Passports cross-IDs and each source's license disposition.",
+    "Every candidate assigned a gate disposition (PASS / FLAG / EXCLUDE) with rationale; no model promoted to an entry task without a committed gate artifact.",
+    "Known-misidentified lines are retained on the roster with their warning (not silently dropped) so they can be catalogued with the flag.",
+    "Controlled-access-only models (no open data) are excluded; COSMIC/OncoKB-only data marked link-only."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "MODEL-ROSTER.md RRID-keyed, gate-triaged candidate roster, committed to the repo.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

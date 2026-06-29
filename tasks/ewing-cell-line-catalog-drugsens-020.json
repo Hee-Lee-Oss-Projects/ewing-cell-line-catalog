@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-drugsens-020",
+  "title": "Drug-sensitivity availability (PRISM/GDSC) annotation",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "pharmacogenomics"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Drug-sensitivity datasets (PRISM, GDSC) may exist for some models, but redistribution terms (esp. GDSC) are unverified. This task annotates availability only, and redistributes derived values only if terms are verified at the gate - otherwise it is an availability flag with a link. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Annotate per-model drug-sensitivity availability (PRISM/GDSC), redistributing values only if gate-verified, else availability-flag only.",
+  "acceptanceCriteria": [
+    "Per-model drug-sensitivity availability (PRISM/GDSC) recorded as present/absent with a link; provenanced.",
+    "Derived values are redistributed only if the source's redistribution terms PASS gate-002 (committed artifact); GDSC stays availability-flag/link-only until terms are verified.",
+    "No therapeutic/prognostic claim; deliverable dataset licensed CC-BY-4.0 for any redistributable aggregate; validates in CI."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/drug-sensitivity-availability per-model annotation (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

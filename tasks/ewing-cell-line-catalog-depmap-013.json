@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-depmap-013",
+  "title": "DepMap dependency aggregator (CRISPR Chronos) + golden fixtures; pin release",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "functional-genomics"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Selective gene dependencies come from DepMap CRISPR (Chronos) gene-effect data. The project needs a deterministic aggregator that pins a specific public DepMap release and emits only CC-BY-permitted per-model summaries, referencing (never re-hosting) bulk source matrices. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build the DepMap dependency aggregator that pins a release and emits per-model selective-dependency summaries with golden fixtures.",
+  "acceptanceCriteria": [
+    "Pins a specific DepMap public release (recorded in compiledFromReleases); aggregates CRISPR gene-effect (Chronos) into per-model selective-dependency summaries.",
+    "DepMap release license verified to permit redistributable aggregates (gate-002 artifact); only CC-BY-permitted aggregates emitted; bulk source matrices referenced, not re-hosted.",
+    "Ships golden fixtures: synthetic gene-effect matrix -> expected summary; methodology + caveat attached to output. Code MIT; CI green; no credentials embedded."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "src/depmap/ dependency aggregator plus golden fixtures, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

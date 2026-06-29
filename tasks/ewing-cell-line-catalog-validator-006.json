@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-validator-006",
+  "title": "Schema validator + cross-source consistency checks + golden fixtures",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Every catalog record must validate against the canonical schema (schema-001) and pass cross-source consistency checks (e.g. provenance present on value-bearing fields, no controlled-access provenance) before entry. A validator with golden fixtures enforces this in CI. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build the schema validator and cross-source consistency checks with golden fixtures, green in CI.",
+  "acceptanceCriteria": [
+    "Validates each record against the canonical schema (schema-001) and rejects records missing field-level provenance on value-bearing fields.",
+    "Cross-source consistency checks flag controlled-access provenance, COSMIC/OncoKB values redistributed instead of link-only, and uncited assertions as failures.",
+    "Ships golden fixtures: at least one valid record passes and at least one deliberately invalid record fails for each check; synthetic/public fixtures only.",
+    "Code MIT-licensed; pnpm build && pnpm test && pnpm lint green; no credentials embedded."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "src/validator/ schema + cross-source consistency validator plus golden fixtures, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

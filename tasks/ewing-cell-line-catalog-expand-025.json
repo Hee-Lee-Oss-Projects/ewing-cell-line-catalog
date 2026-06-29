@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-expand-025",
+  "title": "Catalog remaining authenticated/variant Ewing lines",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "Beyond the core roster, additional authenticated/variant Ewing lines can be catalogued as throughput from MODEL-ROSTER.md via the gate. The concrete set is gate-determined from the roster, so this is a representative throughput task, not a fan-out across pre-named lines. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Catalogue remaining gate-passed authenticated/variant Ewing lines as throughput from MODEL-ROSTER.md.",
+  "acceptanceCriteria": [
+    "Additional models are catalogued only after passing gate-002 (committed artifact) from MODEL-ROSTER.md candidates; the set is gate-determined, not fabricated.",
+    "Each new entry is fully field-level provenanced at >= 90/100 with authentication status and resolved identity across all three ID systems.",
+    "Known-misidentified/variant lines are catalogued with their prominent warning, not dropped.",
+    "No NC/controlled data redistributed; deliverable dataset licensed CC-BY-4.0; domain + license reviewers signed off."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/ additional gate-passed authenticated/variant Ewing-line entries (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-scrna-021",
+  "title": "Cross-link to single-cell availability (ewing-single-cell-atlas)",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "single-cell"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Where single-cell data exists for a model in the sibling ewing-single-cell-atlas project, the catalog should cross-link to it (a reference, not a recomputation). This widens reuse without duplicating or moving data. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Cross-link catalogued models to single-cell availability in ewing-single-cell-atlas (reference only, no recompute).",
+  "acceptanceCriteria": [
+    "For each catalogued model with single-cell data in ewing-single-cell-atlas, a provenanced cross-link (not a copy) is recorded.",
+    "No single-cell data is recomputed or re-hosted; only references/links are stored.",
+    "Cross-links validate in CI; deliverable dataset licensed CC-BY-4.0."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/cross-links/single-cell per-model references to ewing-single-cell-atlas (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

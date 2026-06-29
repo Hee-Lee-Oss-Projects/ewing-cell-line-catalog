@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-pdx-022",
+  "title": "Cross-link to PDX/model index (ewing-pdx-model-index)",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "model-systems"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Where a model relates to a PDX/model in the sibling ewing-pdx-model-index project, the catalog should cross-link to it (a reference, not a recomputation), helping researchers move between in-vitro and in-vivo models. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Cross-link catalogued models to related entries in ewing-pdx-model-index (reference only, no recompute).",
+  "acceptanceCriteria": [
+    "For each catalogued model with a related PDX/model entry in ewing-pdx-model-index, a provenanced cross-link (not a copy) is recorded.",
+    "No PDX data is recomputed or re-hosted; only references/links are stored.",
+    "Cross-links validate in CI; deliverable dataset licensed CC-BY-4.0."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/cross-links/pdx per-model references to ewing-pdx-model-index (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

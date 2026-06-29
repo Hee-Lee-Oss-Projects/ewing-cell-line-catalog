@@ -1,0 +1,45 @@
+{
+  "id": "ewing-cell-line-catalog-gate-002",
+  "title": "Open-data / license / donor-privacy triage gate (per source-block)",
+  "project": "ewing-cell-line-catalog",
+  "type": "design-spec",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "data-governance",
+    "licensing",
+    "privacy"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Every source-block feeding the catalog must pass an objective open-data/license/donor-privacy gate before any value is redistributed. This gate is the project's binding admission control: it encodes the cancer guardrails and produces an auditable PASS/FLAG/EXCLUDE artifact per source-block. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Define and document the open-data/license/donor-privacy triage gate plus the committed per-source-block PASS/FLAG/EXCLUDE artifact format.",
+  "acceptanceCriteria": [
+    "Opens with the binding cancer guardrails: open-access-only; dbGaP/EGA/biobank/controlled-access categorically EXCLUDED; COSMIC/OncoKB link-only; no medical advice; provenance required.",
+    "Objective license criterion: a source-block PASSes only if permitsRedistribution: true is set from a cited clause/URL under the output license; missing/unparseable/NC/controlled = FLAG (link-only) or EXCLUDE - never default-allow.",
+    "Donor-privacy rule encoded: donor fields published-only; no enrichment, no external linkage, no re-identification; escalate unusually identifying records; reduce/omit on doubt.",
+    "Requires recording license id + URL + snapshot (committed copy + SHA-256 + Wayback URL) per source-block.",
+    "Produces a committed PASS/FLAG/EXCLUDE artifact per source-block recording which checks ran."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "GATE.md (open-data/license/donor-privacy gate checklist) plus the per-source-block gate-artifact format, committed to the repo.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

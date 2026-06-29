@@ -1,0 +1,44 @@
+{
+  "id": "ewing-cell-line-catalog-sources-003",
+  "title": "Source register with verified per-source licenses (DepMap, Cell Model Passports, Cellosaurus, ICLAC, COSMIC/OncoKB/GDSC dispositions)",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "data-governance",
+    "licensing"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "The catalog draws from a fixed set of upstream resources whose licenses differ (CC-BY-permitted aggregates vs. non-commercial vs. controlled-access vs. link-only). A single source register must record each source's verified license disposition so downstream tasks know what may be redistributed. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Produce a source register listing every upstream resource with its verified license, redistribution disposition, and citation/snapshot.",
+  "acceptanceCriteria": [
+    "Register lists DepMap, Cell Model Passports, Cellosaurus, ICLAC, COSMIC, OncoKB, and GDSC, each with the data it provides and its verified license.",
+    "Each source carries an explicit disposition (ACCEPT-redistribute / link-only / EXCLUDE) justified by a cited license clause/URL per the gate-002 criterion.",
+    "COSMIC and OncoKB recorded as link-only (not redistributed); GDSC marked terms-pending; controlled-access sources marked EXCLUDE.",
+    "Every disposition records license id + URL + snapshot (committed copy + SHA-256 + Wayback URL).",
+    "No source is default-allowed: any missing/unparseable license is FLAGged rather than treated as permissive."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "SOURCES.md source register with verified per-source license dispositions, committed to the repo.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

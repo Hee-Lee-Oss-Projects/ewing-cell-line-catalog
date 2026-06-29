@@ -1,0 +1,40 @@
+{
+  "id": "ewing-cell-line-catalog-resolver-005",
+  "title": "Identity resolver (DepMap ID <-> RRID <-> Cell Model Passports) + golden fixtures",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Models are identified inconsistently across resources; the catalog needs a deterministic resolver that cross-checks DepMap ID, RRID (Cellosaurus CVCL_), and Cell Model Passports ID using RRID as the anchor, reporting conflicts instead of guessing. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build the identity resolver that cross-checks the three ID systems with golden fixtures, including a deliberate conflict that must be flagged.",
+  "acceptanceCriteria": [
+    "Resolves and cross-checks DepMap ID <-> RRID (CVCL_) <-> Cell Model Passports ID using RRID as the anchor; reports unresolved/conflicting mappings rather than guessing.",
+    "Ships golden fixtures incl. a deliberate cross-resource conflict that must be flagged; valid triples resolve, malformed RRIDs fail; synthetic/public fixtures only.",
+    "Code MIT-licensed; pnpm build && pnpm test && pnpm lint green; no credentials embedded."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "src/resolver/ identity-resolver module plus golden fixtures, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

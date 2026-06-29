@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-entries-009",
+  "title": "Full catalog entries for top ~10 authenticated Ewing lines",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "After the pilot, the project catalogues the top ~10 authenticated Ewing lines that pass the gate (drawn from MODEL-ROSTER.md). The specific set is determined by gate triage, not pre-enumerated, so this remains a representative scale-out task rather than a fan-out across named lines. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Catalogue the top ~10 authenticated Ewing lines (gate-passed, from the roster) as complete field-level-provenanced entries.",
+  "acceptanceCriteria": [
+    "10+ models fully catalogued at >= 90/100, each with committed gate artifact and full field-level provenance.",
+    "Identity resolved across all three ID systems for each; authentication status present; cross-source disagreements shown with provenance (not silently resolved).",
+    "No NC/controlled data redistributed; deliverable dataset licensed CC-BY-4.0; domain + license reviewers signed off.",
+    "Lines are selected from gate-passed MODEL-ROSTER.md candidates (roster-008); the concrete set is gate-determined, not fabricated."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/ entries for 10+ authenticated Ewing lines (dataset), each with committed gate artifact.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

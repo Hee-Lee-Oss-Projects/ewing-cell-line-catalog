@@ -1,0 +1,42 @@
+{
+  "id": "ewing-cell-line-catalog-fusion-011",
+  "title": "Fusion-status annotation (EWSR1-FLI1 / EWSR1-ERG / variant) with provenance",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "genomics"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The defining feature of Ewing sarcoma models is the EWSR1 fusion. Each catalogued model needs its fusion annotated (EWSR1-FLI1 vs EWSR1-ERG vs variant/other, with breakpoint type and evidence), with cross-source disagreements surfaced rather than hidden. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Annotate fusion status (partner, breakpoint type, evidence) with field-level provenance for every catalogued model.",
+  "acceptanceCriteria": [
+    "Each catalogued model has fusion annotated as partner5p (EWSR1) / partner3p (FLI1|ERG|other) / breakpointType with an evidence[] array, each provenanced.",
+    "Cross-source disagreements (e.g. FLI1 vs ERG, differing breakpoint type) are shown with all sources, not silently resolved.",
+    "Fusion calls cite a primary/authoritative source; no fusion is asserted without provenance.",
+    "No therapeutic/prognostic claim is attached; deliverable dataset licensed CC-BY-4.0; domain reviewer confirms framing."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/ fusion annotations (provenanced fusion fields) for every catalogued model (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

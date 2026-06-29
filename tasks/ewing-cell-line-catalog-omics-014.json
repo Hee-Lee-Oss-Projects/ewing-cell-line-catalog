@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-omics-014",
+  "title": "Omics-availability map per model (expression/CN/mutations-open/fusions/drug)",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Researchers need to know which open omics data types exist for each model (expression, copy-number, open mutations, fusions, drug) without the catalog recomputing or re-hosting raw data. This is an availability map of what authoritative resources already publish. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build the per-model omics-availability map recording which open data types each model has, with provenance.",
+  "acceptanceCriteria": [
+    "For each catalogued model, records availability (present/absent + link) for expression, copy-number, open mutations, fusions, and drug-response data types.",
+    "Availability reflects only what authoritative open resources already publish; no raw data is recomputed or re-hosted; controlled-access types marked unavailable/EXCLUDE.",
+    "Each availability assertion is field-level provenanced (source + version + link); COSMIC/OncoKB entries are link-only.",
+    "Deliverable dataset licensed CC-BY-4.0; validates in CI."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/omics-availability per-model map (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

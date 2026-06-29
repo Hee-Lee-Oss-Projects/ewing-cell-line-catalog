@@ -1,0 +1,42 @@
+{
+  "id": "ewing-cell-line-catalog-pilot-007",
+  "title": "End-to-end catalog entry for pilot model A673",
+  "project": "ewing-cell-line-catalog",
+  "type": "data",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "A673 is the most widely used, well-characterized Ewing model and is covered by all core sources, making it the cold-start pilot. Cataloguing it end-to-end exercises the schema, gate, resolver, and validator and proves the pipeline before scale-out. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Produce the complete, field-level-provenanced A673 catalog entry end-to-end with a committed gate artifact and reviewer sign-off.",
+  "acceptanceCriteria": [
+    "A673 chosen because all core sources cover it; every contributing source-block passed gate-002 (artifact committed); identity resolved across all three ID systems.",
+    "Authentication status recorded (cross-checked vs. ICLAC + Cellosaurus); disease/Oncotree, fusion (EWSR1-FLI1 with breakpoint type + evidence), donor (published-only), availability, omics-availability populated; all field-level provenanced.",
+    "Completeness score recorded (before/after; after >= 90/100); entry validates in CI.",
+    "License+privacy and Domain reviewers signed off; no NC/controlled data present; no therapeutic/clinical claim.",
+    "Real outcome reachable via self-serve path: any error found in A673's upstream records is prepared as an upstream correction (submission counts toward M0; acceptance toward M3)."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "catalog/ewing-cell-line-catalog-A673.json end-to-end entry plus its committed gate artifact (dataset).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

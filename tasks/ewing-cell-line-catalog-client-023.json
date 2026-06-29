@@ -1,0 +1,40 @@
+{
+  "id": "ewing-cell-line-catalog-client-023",
+  "title": "Small R/Python client to query the published catalog",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "To lower reuse friction, a small R/Python client lets researchers query the published CC-BY catalog (read-only) without re-implementing parsing. The client only reads published artifacts; it adds no data. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build a small R/Python client that queries the published CC-BY catalog, with tests.",
+  "acceptanceCriteria": [
+    "Client reads the published CC-BY catalog (JSON/CSV) and supports lookup by RRID/DepMap ID/Cell Model Passports ID and basic filtering.",
+    "Client only consumes published artifacts; it embeds no data and no credentials.",
+    "Ships tests/examples against a fixture catalog; code MIT-licensed; CI green."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "clients/ R and/or Python client for the published catalog, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

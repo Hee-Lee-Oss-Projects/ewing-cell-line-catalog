@@ -1,0 +1,39 @@
+{
+  "id": "ewing-cell-line-catalog-reuse-018",
+  "title": "Track + verify external reuse/adoption events",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Sustainability depends on demonstrable external reuse. The project tracks verifiable reuse events (citations, forks building on the catalog, issues/PRs referencing it) and, on the first confirmed research consumer, flips relevant tasks to verifiedNeed: true. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Track and verify external reuse/adoption events and record them with verifiable evidence.",
+  "acceptanceCriteria": [
+    "3+ verifiable external reuse events recorded (citation, fork building on the catalog, or issue/PR referencing it); each with verifiable evidence.",
+    "On the first confirmed research consumer, relevant tasks flip verifiedNeed: true with requestor set."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "REUSE.md (plus outcomes/ entries) recording verified external reuse events.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

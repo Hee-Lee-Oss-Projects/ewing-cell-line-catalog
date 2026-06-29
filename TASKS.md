@@ -252,6 +252,69 @@ documented with a named steward.
 
 ---
 
+## Acceptance criteria — remaining tasks
+
+These rows had no explicit checklist above; their full `acceptanceCriteria[]` now live in the
+machine-readable `tasks/<id>.json` files. Summary:
+
+- **sources-003** — Register lists DepMap, Cell Model Passports, Cellosaurus, ICLAC, COSMIC, OncoKB,
+  GDSC with verified license + ACCEPT/link-only/EXCLUDE disposition (cited clause/URL + snapshot);
+  COSMIC/OncoKB link-only; GDSC terms-pending; no source default-allowed.
+- **reviewers-004** — License+privacy and Domain reviewers named with sign-off gates; ≥ 1
+  beneficiary-outreach thread opened and recorded; `requestor`/`verifiedNeed` stay unset until a
+  named consumer confirms use.
+- **validator-006** — Validates records vs. schema-001; cross-source checks flag missing provenance,
+  controlled-access provenance, and redistributed COSMIC/OncoKB; golden fixtures pass/fail per check;
+  MIT; CI green.
+- **fusion-011** — `partner5p/partner3p/breakpointType` + `evidence[]` provenanced per model;
+  cross-source disagreements shown, not resolved; primary-source cited; no therapeutic claim.
+- **upstream-012** — ≥ 1 correction submitted via self-serve channel; `outcomes/<event-id>.json`
+  (channel, permalink, timestamp, before/after); derived only from provenanced findings; submission
+  counts to M1, acceptance to corrections-017.
+- **omics-014** — Per-model availability (present/absent + link) for expression/CN/open-mutations/
+  fusions/drug; only what authoritative open sources publish (no recompute/re-host); provenanced;
+  COSMIC/OncoKB link-only.
+- **refresh-019** — Documented quarterly DepMap pin→diff→re-aggregate + re-authentication vs. current
+  ICLAC + Cellosaurus; named steward; source versions recorded; document-only.
+- **drugsens-020** — Per-model PRISM/GDSC availability flag + link; values redistributed only if the
+  source PASSes gate-002 (GDSC stays link-only until terms verified); no therapeutic claim.
+- **scrna-021 / pdx-022** — Provenanced cross-links (not copies) to `ewing-single-cell-atlas` /
+  `ewing-pdx-model-index`; no recompute/re-host; CI-validated; CC-BY-4.0.
+- **client-023** — Read-only R/Python client over the published CC-BY catalog (lookup by RRID/DepMap/
+  Cell Model Passports ID + filters); embeds no data/credentials; tests; MIT; CI green.
+- **i18n-024** — Intro + standing caveats translated faithfully (caveat meaning preserved exactly);
+  qualified language reviewer sign-off; source-compatible license; expands per confirmed language.
+- **expand-025** — Additional models catalogued only after passing gate-002; ≥ 90/100, full
+  provenance, identity resolved across three ID systems; misidentified/variant lines kept with
+  warning; CC-BY-4.0.
+
+## Fan-out notes
+
+Every TASKS.md row already carries a concrete, enumerated `id`, so each row maps to exactly one
+`tasks/<id>.json` — **no template fan-out was performed**. The per-model dimension is deliberately
+**not** fanned out into one JSON per cell line: the concrete model set is determined by gate-002
+triage of `MODEL-ROSTER.md` (roster-008), not pre-enumerated. Accordingly `entries-009` (top ~10
+authenticated lines) and `expand-025` (remaining lines) remain **representative scale-out tasks**
+that expand once the roster is gate-triaged. Likewise `i18n-024` stays a single representative task
+that expands per language once the target-language set and language reviewers are secured. No
+languages, datasets, models, or beneficiaries were fabricated.
+
+## Generated task index
+
+All 25 backlog rows now have a schema-valid `tasks/<id>.json` (validated against the Elyos
+taskSchema; filenames match ids; no duplicates; no extra keys):
+
+- M0: `schema-001` (seed), `gate-002`, `sources-003`, `reviewers-004`, `resolver-005`,
+  `validator-006`, `pilot-007`
+- M1: `roster-008`, `entries-009`, `misid-010`, `fusion-011`, `upstream-012`
+- M2: `depmap-013`, `omics-014`, `deps-015`, `publish-016`
+- M3: `corrections-017`, `reuse-018`, `refresh-019`
+- Backlog: `drugsens-020`, `scrna-021`, `pdx-022`, `client-023`, `i18n-024`, `expand-025`
+
+(All ids are prefixed `ewing-cell-line-catalog-`.) All tasks are `lane: donated`,
+`status: open`, `requestor: TO BE SECURED`, `verifiedNeed: false`; `riskTier` follows the policy
+above (no `high`); code/PR tasks are `MIT`, metadata/document/dataset tasks `CC-BY-4.0`.
+
 ## Example task JSON
 
 ```json

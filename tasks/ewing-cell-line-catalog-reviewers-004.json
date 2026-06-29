@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-reviewers-004",
+  "title": "Name/secure License+privacy reviewer + Domain reviewer; open beneficiary outreach",
+  "project": "ewing-cell-line-catalog",
+  "type": "research",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Pilot and catalog review require a named License+privacy reviewer and a named Domain (Ewing/sarcoma biology) reviewer before any model is signed off, and the project needs at least one beneficiary-outreach thread opened to ground real need. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Secure and record the named License+privacy and Domain reviewers and open at least one beneficiary-outreach thread.",
+  "acceptanceCriteria": [
+    "A License+privacy reviewer and a Domain reviewer are named (role + how they are qualified) and recorded before the pilot review proceeds.",
+    "Reviewer responsibilities and sign-off gates are documented (which deliverables each must approve).",
+    "At least one beneficiary/partner-outreach thread is opened and recorded (channel + date + ask), without overstating need.",
+    "requestor/verifiedNeed remain TO BE SECURED/false until a named research consumer confirms use."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "REVIEWERS.md recording named reviewers, their sign-off gates, and the opened beneficiary-outreach thread(s).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

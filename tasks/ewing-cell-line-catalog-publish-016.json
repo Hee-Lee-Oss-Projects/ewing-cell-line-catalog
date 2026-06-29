@@ -1,0 +1,40 @@
+{
+  "id": "ewing-cell-line-catalog-publish-016",
+  "title": "Publish catalog: machine-readable (JSON+CSV) + human-readable site",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The catalog must be published in reusable forms: a canonical JSON, a CSV projection, and a human-readable site, all projections of the canonical model with field-level provenance and attribution. Site code is MIT; catalog metadata/aggregates are CC-BY-4.0. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Publish the catalog as canonical JSON + CSV projection + human-readable site, all field-level provenanced with upstream attribution.",
+  "acceptanceCriteria": [
+    "Catalog emitted as canonical JSON + CSV projection + human-readable site, all assertions field-level provenanced; attribution to DepMap/Cell Model Passports/Cellosaurus/ICLAC present.",
+    "Catalog metadata/aggregates CC-BY-4.0; site code MIT; CI green; no controlled/NC data present.",
+    "JSON/CSV/site are projections of the single canonical model (never hand-maintained parallel formats)."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "site/ + dist/catalog.json + dist/catalog.csv publishing pipeline, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

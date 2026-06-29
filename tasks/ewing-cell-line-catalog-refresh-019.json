@@ -1,0 +1,41 @@
+{
+  "id": "ewing-cell-line-catalog-refresh-019",
+  "title": "Quarterly DepMap refresh + re-authentication process",
+  "project": "ewing-cell-line-catalog",
+  "type": "maintenance",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Upstream resources release new versions; the catalog must stay current and re-authenticate models on a cadence. A documented quarterly DepMap refresh + re-authentication process, with a named steward, keeps the catalog trustworthy. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Document the quarterly DepMap refresh + re-authentication process with a named steward.",
+  "acceptanceCriteria": [
+    "Process documents how a new DepMap release is pinned, diffed against the prior release, and re-aggregated; drift is flagged as an explicit task.",
+    "Re-authentication step re-checks every catalogued model against the current ICLAC register + Cellosaurus flags on each refresh.",
+    "A named steward owns the cadence; the process records source versions per refresh.",
+    "Process is deliverable-document only; no controlled/NC data introduced."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "REFRESH-PROCESS.md documenting the quarterly refresh + re-authentication process and named steward.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

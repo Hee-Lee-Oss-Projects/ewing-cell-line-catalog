@@ -1,0 +1,42 @@
+{
+  "id": "ewing-cell-line-catalog-i18n-024",
+  "title": "Translate human-readable catalog intro/caveats",
+  "project": "ewing-cell-line-catalog",
+  "type": "writing",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines",
+    "localization"
+  ],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "translation",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Translating the catalog's human-readable intro and (critically) its standing caveats widens reuse, but mistranslating the 'research observation; not medical advice' caveat is a real risk - so a qualified language reviewer must sign off. Target languages are not yet enumerated, so this is one representative task that expands once languages and reviewers are secured. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Translate the catalog's human-readable intro and standing caveats into a confirmed target language, with language-reviewer sign-off.",
+  "acceptanceCriteria": [
+    "Intro and all standing caveats (esp. 'research observation; not medical advice; not a treatment recommendation') are translated faithfully, with the caveat's meaning preserved exactly.",
+    "A qualified language reviewer signs off on the translation before publication.",
+    "Target language(s) are confirmed before work begins; this task expands per language once the language set and reviewers are secured (no languages fabricated).",
+    "Translation is published under a license compatible with the source (catalog content is CC-BY-4.0)."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "site/i18n/ translated intro + caveats for a confirmed target language (translation).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}
