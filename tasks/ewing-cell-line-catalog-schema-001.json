@@ -1,0 +1,37 @@
+{
+  "id": "ewing-cell-line-catalog-schema-001",
+  "title": "Canonical cell-line record schema + field-level provenance model",
+  "project": "ewing-cell-line-catalog",
+  "type": "design-spec",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["cancer-research", "ewing-sarcoma", "bioinformatics", "open-data", "cell-lines"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Ewing sarcoma research relies on a small set of cell-line models whose metadata and open data are fragmented across DepMap, Cell Model Passports, Cellosaurus, and the ICLAC misidentified-cell-lines register. Before cataloguing any model, the project needs one canonical record schema and a field-level provenance model that all outputs (JSON, CSV, human-readable site) are projections of. The deliverable is open-access metadata and derived aggregates only — never patient-level or controlled-access data, and never a clinical claim.",
+  "objective": "Define the reusable canonical cell-line record schema and the field-level provenance model that every per-model catalog task will use.",
+  "acceptanceCriteria": [
+    "Schema documents all fields: identity (depmapId, rrid, cellModelPassportId, ccleName, synonyms), authentication, disease (oncotreeCode, lineage, subtype), fusion (partner5p, partner3p, breakpointType, evidence[]), donor (sexAtSampling, ageAtSampling, siteOfSampling, sampleType), culture, availability[], omicsAvailability, dependencies, license, completenessScore, provenance.",
+    "Every value-bearing field is a {value, source, sourceVersion, retrievedAt, license} provenance cell (or array); an uncited assertion is defined as a review failure.",
+    "Authentication/misidentification is the first-surfaced block; the dependencies field includes a mandatory standing caveat ('research observation; not medical advice; not a treatment recommendation').",
+    "Schema forbids controlled-access provenance (no dbGaP/EGA/biobank source values) and marks COSMIC/OncoKB source-blocks as link-only (not redistributed).",
+    "Donor fields are constrained to published-only values with no enrichment/linkage, per the donor-privacy rule.",
+    "Schema states output license: metadata/aggregates CC-BY-4.0, code MIT; deliverable is metadata, never patient data.",
+    "pnpm build && pnpm test && pnpm lint pass for any committed schema tooling; commit is DCO signed-off."
+  ],
+  "resources": [
+    "C:\\code\\elyos\\planning\\projects\\ewing-cell-line-catalog\\PLAN.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "DepMap / Cancer Dependency Map (Broad Institute)",
+    "Cell Model Passports (Wellcome Sanger Institute)",
+    "Cellosaurus (SIB) — RRID/CVCL identifiers",
+    "ICLAC Register of Misidentified Cell Lines"
+  ],
+  "output": "A canonical cell-line record schema plus a field-level provenance model definition, committed to the project repo and ready for reuse by per-model catalog tasks.",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}
