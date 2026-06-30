@@ -1,0 +1,43 @@
+{
+  "id": "ewing-cell-line-catalog-alert-026",
+  "title": "Misidentification-alert diff: detect when catalogued lines are newly flagged or changed on ICLAC/Cellosaurus or DepMap",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "PLAN.md v0.2 adds a new M3 exit criterion: a misidentification-alert diff must fire when any catalogued Ewing line newly appears on the ICLAC/Cellosaurus problematic-flag list, is removed or reclassified there, or is dropped or model-metadata-changed in a DepMap release. The existing refresh-019 task documents the quarterly re-authentication *process*, but no task currently builds the automated diff/alert mechanism that compares the current ICLAC/Cellosaurus and DepMap state against the last-pinned state and surfaces changes as a machine-readable diff and/or human-readable notification. Standing guardrails bind this task: open-access sources only (no dbGaP/EGA/biobank/controlled-access); COSMIC/OncoKB are link-only; donor fields are published-only with no re-identification or external linkage; every assertion carries field-level provenance; the deliverable is de-identified research metadata, never patient data and never a clinical/therapeutic recommendation.",
+  "objective": "Build the misidentification-alert diff mechanism that detects and surfaces changes to catalogued lines' ICLAC/Cellosaurus misidentification status or DepMap model presence between release snapshots.",
+  "acceptanceCriteria": [
+    "Compares the catalogued roster's ICLAC/Cellosaurus misidentification flags between the pinned release snapshot and the current release; emits a machine-readable diff (JSON) listing any line whose misidentified-enum status, diagnosisReclassified flag, or Cellosaurus 'problematic' flag changed.",
+    "Compares the catalogued roster against the current DepMap release model list; flags any line dropped or substantively model-metadata-changed since the pinned release.",
+    "Diff output is actionable: each change record identifies the line (by primary CVCL accession), the prior state, the new state, and the authority source + version for both.",
+    "Mechanism is runnable in CI as a scheduled or manually-triggered check; emits a human-readable summary (stdout or a committed report artifact) in addition to the machine-readable diff.",
+    "Alert never independently determines misidentification status; it quotes verbatim from ICLAC/Cellosaurus with version — a change in upstream authority status triggers the alert, not a novel inference.",
+    "Code MIT-licensed; pnpm build && pnpm test && pnpm lint green; no credentials embedded; synthetic golden fixtures cover the key change scenarios (new flag, flag removed, DepMap drop).",
+    "DCO signed-off."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "Cellosaurus (SIB) — machine-readable 'problematic' flags re-encoding ICLAC (CC BY 4.0)",
+    "ICLAC Register of Misidentified Cell Lines — versioned PDF (v14, 15 Feb 2026; 608 lines)",
+    "DepMap / Cancer Dependency Map (Broad Institute) — public releases CC BY 4.0 on Figshare (pin exact per-release DOI)"
+  ],
+  "output": "src/alert/ misidentification-alert diff module + golden fixtures + CI integration, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

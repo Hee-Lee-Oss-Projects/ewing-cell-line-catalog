@@ -1,0 +1,46 @@
+{
+  "id": "ewing-cell-line-catalog-mcp-027",
+  "title": "Read-only MCP server over the published catalog (resolveIdentity, getAuthentication, getOmicsAvailability, getDependencies)",
+  "project": "ewing-cell-line-catalog",
+  "type": "code",
+  "lane": "donated",
+  "priority": "low",
+  "domain": [
+    "cancer-research",
+    "ewing-sarcoma",
+    "bioinformatics",
+    "open-data",
+    "cell-lines"
+  ],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "PLAN.md v0.2 introduces an adjacent opportunity: a read-only Model Context Protocol (MCP) server exposing the published catalog as a query surface so any AI agent can look up the trust layer for Ewing models without re-scraping upstream sources. The four endpoints are: resolveIdentity (DepMap ID / RRID / Cell Model Passports ID lookup), getAuthentication (misidentified enum + diagnosisReclassified + strProfile for a line), getOmicsAvailability (per-datatype availability map for a line), and getDependencies (selective-dependency summary for a line). This is a reuse-and-adoption channel that widens the catalog's impact and validates the machine-readable format. It depends on the published catalog (publish-016) being live and stable. Standing guardrails: the server is read-only and exposes only what is already in the openly-licensed CC-BY-4.0 catalog; it never serves controlled-access data, never serves raw upstream matrices, never makes clinical/therapeutic recommendations, and never serves COSMIC/OncoKB content (link-only entries are returned as link-only).",
+  "objective": "Build a read-only MCP server that exposes the published CC-BY-4.0 catalog via four tool endpoints, enabling AI agents to query Ewing model identity, authentication, omics availability, and dependency data with full provenance.",
+  "acceptanceCriteria": [
+    "Implements four MCP tools — resolveIdentity, getAuthentication, getOmicsAvailability, getDependencies — each reading from the published catalog (dist/catalog.json) with no write operations and no external network calls at query time.",
+    "resolveIdentity accepts a DepMap ID (ACH-…), RRID/CVCL accession, or Cell Model Passports ID and returns the full identity block (primary CVCL accession, secondaryAccessions[], cross-IDs tagged direct vs inherited, synonyms); returns a structured not-found response for unknown IDs.",
+    "getAuthentication returns the full authentication block for a line: misidentified enum (clean | misidentified_no_authentic | authentic_stock_exists | contaminated), diagnosisReclassified axis, strProfile (markers where redistributable, else link-only), and the ICLAC/Cellosaurus source + version for the misidentification status.",
+    "getOmicsAvailability returns the per-datatype availability map (true | false | unknown for expression/CN/mutations-open/fusions/drug), each with datasetId, releaseVersion, url, lastVerifiedRelease.",
+    "getDependencies returns the per-model dependency summary (selectiveDependencies[], source, release, methodologyRef) with the standing 'research observation; not medical advice; not a treatment recommendation' caveat embedded in every response payload.",
+    "COSMIC/OncoKB-sourced content is returned as link-only in every response; the server never redistributes non-commercial-licensed data or any controlled-access data.",
+    "Server code MIT-licensed; pnpm build && pnpm test && pnpm lint green; integration tests cover each tool with a catalog fixture; no credentials embedded.",
+    "MCP manifest (server name, version, tool schemas) committed to the repo; a short usage README explains how to point an agent at the server.",
+    "DCO signed-off."
+  ],
+  "resources": [
+    "PLAN.md",
+    "TASKS.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "Model Context Protocol (MCP) specification — https://modelcontextprotocol.io",
+    "Published catalog (publish-016 output): dist/catalog.json",
+    "Cellosaurus (SIB) — CC BY 4.0",
+    "DepMap / Cancer Dependency Map (Broad Institute) — CC BY 4.0 per release (Figshare DOI)"
+  ],
+  "output": "src/mcp-server/ read-only MCP server module + integration tests + MCP manifest, green in CI (PR).",
+  "requestor": "TO BE SECURED",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}
