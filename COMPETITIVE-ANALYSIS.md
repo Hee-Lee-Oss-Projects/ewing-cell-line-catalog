@@ -1,6 +1,6 @@
 # Competitive & Improvement Analysis — `ewing-cell-line-catalog`
 
-Analyst review of the Elyos good-deed project. Scope: an open, curated, fully-provenanced
+Analyst review of the Hee-Lee Oss good-deed project. Scope: an open, curated, fully-provenanced
 metadata catalog of Ewing sarcoma cell-line models — identity/STR, fusion type, source/availability,
 open-omics availability, misidentification flags — cross-linking authoritative resources
 (Cellosaurus, DepMap/CCLE, Cell Model Passports, ICLAC, ATCC/DSMZ). Cell lines are de-identified

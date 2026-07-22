@@ -335,7 +335,7 @@ sources agree/disagree). Fields:
 8. **Review & publish** — license reviewer + domain reviewer sign-off; publish machine-readable +
    human-readable; file upstream corrections where errors were found.
 
-**Tech stack.** TypeScript, ESM, pnpm workspaces (Elyos convention). Tooling is small Node packages
+**Tech stack.** TypeScript, ESM, pnpm workspaces (Hee-Lee Oss convention). Tooling is small Node packages
 with minimal dependencies. Catalog authored as JSON (canonical) with CSV + Markdown/static-site
 projections. No runtime services; everything runs locally or in CI. Source data is accessed via the
 providers' published download endpoints / files at pinned release versions; **we reference, we do not
@@ -592,11 +592,11 @@ The candidate model roster that feeds per-model tasks lives in `MODEL-ROSTER.md`
   Data, licensing & compliance.)
 - **External standards:** RRID / Cellosaurus CVCL identifiers, Oncotree disease ontology, HGNC gene
   symbols (for fusion partners and dependency genes), SPDX license identifiers.
-- **Sibling Elyos projects (cross-link, not dependency):** `ewing-open-data-catalog`,
+- **Sibling Hee-Lee Oss projects (cross-link, not dependency):** `ewing-open-data-catalog`,
   `ewing-pdx-model-index`, `ewing-single-cell-atlas`, `ewing-expression-reanalysis`,
   `ewing-fusion-detection-benchmark`, `ewing-drug-target-evidence` — this catalog links to and is
   linkable from these; it does not block on them.
-- **Elyos pieces:** Task JSON schema (`packages/schema`), donated-lane CLI workspace/PR flow
+- **Hee-Lee Oss pieces:** Task JSON schema (`packages/schema`), donated-lane CLI workspace/PR flow
   (`packages/cli`), good-deed definition + refusal guardrails. No funded-lane/runner dependency.
 
 ## Risks & mitigations
@@ -623,7 +623,7 @@ The candidate model roster that feeds per-model tasks lives in `MODEL-ROSTER.md`
   published catalog files, and the references we publish.
 - **Secrets handling:** tooling needs no credentials by default. If a source-download token is ever
   needed, it is supplied by the human running the task and must never be written into logs, receipts,
-  or committed files (per Elyos rules).
+  or committed files (per Hee-Lee Oss rules).
 - **PII / donor privacy:** the dominant concern is *upstream* donor provenance in cell-line records.
   Handled by the published-only rule, the no-re-identification/no-linkage prohibition, and the
   License+privacy gate. Controlled-access data is never touched.
@@ -703,11 +703,11 @@ expanding this project's scope (each is a **cross-link or a separate project**, 
 
 ## References
 
-- Elyos work rules — `C:\code\elyos\CLAUDE.md`
-- Good Deed Definition + risk tiers — `C:\code\elyos\docs\good-deed-definition.md`
-- Task JSON schema — `C:\code\elyos\packages\schema\src\schemas.ts`
-- Portfolio roadmap (Track 8 cancer guardrails) — `C:\code\elyos\planning\ROADMAP.md`
-- Sibling exemplar (catalog/datasheets house style) — `C:\code\elyos\planning\projects\open-data-datasheets\PLAN.md`
+- Hee-Lee Oss work rules — `C:\code\hee-lee-oss\CLAUDE.md`
+- Good Deed Definition + risk tiers — `C:\code\hee-lee-oss\docs\good-deed-definition.md`
+- Task JSON schema — `C:\code\hee-lee-oss\packages\schema\src\schemas.ts`
+- Portfolio roadmap (Track 8 cancer guardrails) — `C:\code\hee-lee-oss\planning\ROADMAP.md`
+- Sibling exemplar (catalog/datasheets house style) — `C:\code\hee-lee-oss\planning\projects\open-data-datasheets\PLAN.md`
 - DepMap / Cancer Dependency Map (Broad Institute) — CRISPR gene-effect (Chronos), CCLE; public
   releases CC BY 4.0 on Figshare (pin exact per-release DOI, e.g. DepMap 24Q4 Public)
 - Cell Model Passports (Wellcome Sanger Institute) — REST API; **per-dataset, mixed licensing**

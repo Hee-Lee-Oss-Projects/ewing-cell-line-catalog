@@ -27,7 +27,7 @@
   "resources": [
     "PLAN.md",
     "TASKS.md",
-    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "C:\\code\\hee-lee-oss\\packages\\schema\\src\\schemas.ts",
     "DepMap / Cancer Dependency Map (Broad Institute)",
     "Cell Model Passports (Wellcome Sanger Institute)",
     "Cellosaurus (SIB) — RRID/CVCL identifiers",

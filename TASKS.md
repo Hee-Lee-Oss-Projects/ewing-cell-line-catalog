@@ -2,9 +2,9 @@
 
 > Status: Draft · Version: 0.2.0 · Last updated: 2026-06-29 · Owner: TBD (maintainer) · Lane: donated
 
-## How these tasks map to Elyos
+## How these tasks map to Hee-Lee Oss
 
-Each task below becomes an Elyos **Task JSON** validated against
+Each task below becomes a Hee-Lee Oss **Task JSON** validated against
 `packages/schema/src/schemas.ts`. Field mapping:
 
 - `id` — stable slug from the tables (e.g. `ewing-cell-line-catalog-schema-001`).
@@ -301,7 +301,7 @@ languages, datasets, models, or beneficiaries were fabricated.
 
 ## Generated task index
 
-All 25 backlog rows now have a schema-valid `tasks/<id>.json` (validated against the Elyos
+All 25 backlog rows now have a schema-valid `tasks/<id>.json` (validated against the Hee-Lee Oss
 taskSchema; filenames match ids; no duplicates; no extra keys):
 
 - M0: `schema-001` (seed), `gate-002`, `sources-003`, `reviewers-004`, `resolver-005`,
@@ -343,8 +343,8 @@ above (no `high`); code/PR tasks are `MIT`, metadata/document/dataset tasks `CC-
     "pnpm build && pnpm test && pnpm lint pass for any committed schema tooling; commit is DCO signed-off."
   ],
   "resources": [
-    "C:\\code\\elyos\\planning\\projects\\ewing-cell-line-catalog\\PLAN.md",
-    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "C:\\code\\hee-lee-oss\\planning\\projects\\ewing-cell-line-catalog\\PLAN.md",
+    "C:\\code\\hee-lee-oss\\packages\\schema\\src\\schemas.ts",
     "DepMap / Cancer Dependency Map (Broad Institute)",
     "Cell Model Passports (Wellcome Sanger Institute)",
     "Cellosaurus (SIB) — RRID/CVCL identifiers",

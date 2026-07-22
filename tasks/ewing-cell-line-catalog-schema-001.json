@@ -23,8 +23,8 @@
     "pnpm build && pnpm test && pnpm lint pass for any committed schema tooling; commit is DCO signed-off."
   ],
   "resources": [
-    "C:\\code\\elyos\\planning\\projects\\ewing-cell-line-catalog\\PLAN.md",
-    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "C:\\code\\hee-lee-oss\\planning\\projects\\ewing-cell-line-catalog\\PLAN.md",
+    "C:\\code\\hee-lee-oss\\packages\\schema\\src\\schemas.ts",
     "DepMap / Cancer Dependency Map (Broad Institute)",
     "Cell Model Passports (Wellcome Sanger Institute)",
     "Cellosaurus (SIB) — RRID/CVCL identifiers",
